@@ -12,7 +12,11 @@ public class Main {
     }
 
     public static void solution(String[] orders, int[] course){
-       List<Set<String>> i =  Arrays.stream(orders).map(String::chars).map(charStream -> charStream.mapToObj(menu -> String.valueOf((char) menu)).collect(Collectors.toSet())).collect(Collectors.toList());
+       List<Set<String>> i =  Arrays.stream(orders)
+               .map(String::chars)
+               .map(charStream -> charStream.mapToObj(menu -> String.valueOf((char) menu))
+                       .collect(Collectors.toSet()))
+               .collect(Collectors.toList());
 
        Map<Integer, List<Course>> courses = new HashMap<>();
        for(int length : course){
@@ -34,7 +38,8 @@ public class Main {
     private static void getCourses(char nextMenu, Set<String> selectedMenus, List<Set<String>> orderList, Map<Integer, List<Course>> courses ){
 
 
-      int occurrences = (int) orderList.stream().filter(order -> order.containsAll(selectedMenus)).count();
+      int occurrences = (int) orderList.stream()
+              .filter(order -> order.containsAll(selectedMenus)).count();
 
       // 다음 글자가 포함된 Set의 개수가 2미만이면 코스가 생성되지 않으므로 리턴
       if(occurrences < 2) return;
